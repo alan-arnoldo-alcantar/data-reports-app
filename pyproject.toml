@@ -1,0 +1,10 @@
+[project]
+name = "data-reports-app"
+version = "0.2.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi[standard]>=0.116.1",
+    "passlib[argon2]>=1.7.4",
+]
