@@ -10,6 +10,7 @@ dependencies = [
     "mypy>=1.17.1",
     "passlib[argon2]>=1.7.4",
     "psycopg[binary,pool]>=3.2.9",
+    "pydantic-settings>=2.10.1",
     "pyjwt>=2.10.1",
     "ruff>=0.12.11",
     "sqlalchemy>=2.0.43",

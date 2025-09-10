@@ -1,23 +1,21 @@
 from fastapi import FastAPI
-from contextlib import asynccontextmanager
-from sqlalchemy import text
-from .core.database import asyncio_engine
+from fastapi.routing import APIRoute
 
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    try:
-        async with asyncio_engine.connect() as conn:
-            await conn.execute(text("SELECT 1"))
-        print("✅ DataBase connected successfully")
-    except Exception as e:
-        print("❌ Could not connect to DataBase:", e)
-    yield
-    await asyncio_engine.dispose()
-    print("🔒 Connection closed")
+# from app.api.main import api_router
+from app.core.config import settings
 
 
-app = FastAPI(lifespan=lifespan)
+# def custom_generate_unique_id(route: APIRoute) -> str:
+#     return f"{route.tags[0]}-{route.name}"
 
-@app.get("/")
+app = FastAPI(
+    title=settings.PROJECT_NAME,
+    openapi_url=f"{settings.API_V1_STR}/openapi.json",
+    # generate_unique_id_function=custom_generate_unique_id,
+)
+
+# app.include_router(api_router, prefix=settings.API_V1_STR)
+
+@app.get("/",tags = ["Root"])
 async def root():
     return {"message": "Hello World"}
