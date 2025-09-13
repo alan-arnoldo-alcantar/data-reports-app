@@ -1,9 +1,12 @@
 from fastapi import APIRouter
 
+from app.schemas.users import UserCreate, UserRead
+
 router = APIRouter(prefix="/users",tags=["users"])
 
-@router.post("/signup")
-def register_user():
+@router.post("/")
+def create_user(user_in: UserCreate) -> UserRead:
     """
-    Create new user without the need to be logged in.
+    Create new user.
     """
+    obj = user
